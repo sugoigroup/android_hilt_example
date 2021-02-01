@@ -7,6 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module // Module은 클래스에 정의
@@ -43,6 +44,21 @@ class MyHiltModule {
 
     @Singleton
     @Provides
-    // 리턴 타입이 String 이라면 이게 실행
-    fun saveToRepository(): String = "Saved"
+    @SaveRepoAction
+    // 리턴 타입이 String 이고 @SaveRepoAction 이라면 이게 실행
+    fun saveToRepository(): String = "delete"
+
+    @Singleton
+    @Provides
+    @DeleteRepoAction
+    // 리턴 타입이 String 이고  @DeleteARepoction 이라면 이게 실행
+    fun deleteToRepository(): String = "Saved"
 }
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+internal annotation class SaveRepoAction
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+internal annotation class DeleteRepoAction
