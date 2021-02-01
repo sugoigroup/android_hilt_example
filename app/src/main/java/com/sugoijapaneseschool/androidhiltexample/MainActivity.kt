@@ -3,7 +3,7 @@ package com.sugoijapaneseschool.androidhiltexample
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.sugoijapaneseschool.androidhiltexample.myservices.CalcMe
+import com.sugoijapaneseschool.androidhiltexample.myservices.*
 import com.sugoijapaneseschool.androidhiltexample.myservices.DeleteRepoAction
 import com.sugoijapaneseschool.androidhiltexample.myservices.SaveRepoAction
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +26,9 @@ class MainActivity : AppCompatActivity() {
     @Inject @DeleteRepoAction
     lateinit var deleteRepo: String // Int 을 리턴타입으로 하는 프로바이더 자동 삽입
 
+    @Inject
+    lateinit var myComputerBinded: MyComputer;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,6 +40,8 @@ class MainActivity : AppCompatActivity() {
         Log.v("Test", "result Code: ${resultCode}")
         Log.v("Test", "deleteRepo result: ${deleteRepo}")
         Log.v("Test", "saveRepo result: ${saveRepo}")
+
+        Log.v("Test", "bind example: ${myComputerBinded.powerStart()}")
 
     }
 }
